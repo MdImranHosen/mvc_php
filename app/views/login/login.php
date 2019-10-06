@@ -43,7 +43,7 @@ input[type="submit"]{cursor: pointer;padding: 5px 8px;}
 <div class="content">
      <h1>Login</h1><hr>
         <div class="loginfrom">
-           <form action="" method="post">
+           <form action="<?php echo BASE_URL; ?>/Login/loginAuth" method="post">
              <table>
                <tr>
                  <th>UserName</th>

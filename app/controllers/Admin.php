@@ -9,7 +9,5 @@ class Admin extends DController
 	{
 		parent:: __construct();
 	}
-	public function login(){
-		$this->load->view('login');
-	}
+	
 }
