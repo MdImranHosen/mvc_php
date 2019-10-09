@@ -1,4 +1,4 @@
- 
+ </article> 
 </div>
 
   <footer class="footeroption">

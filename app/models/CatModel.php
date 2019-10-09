@@ -9,7 +9,7 @@ class CatModel extends DModel{
 		parent::__construct();
 	}
 	public function catList($table){
-        $sql  = "SELECT * FROM $table";
+        $sql  = "SELECT * FROM $table ORDER BY id DESC";
 		return $this->db->select($sql);
 	}
 	public function catByID($table, $id){
