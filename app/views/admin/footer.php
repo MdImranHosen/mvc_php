@@ -12,6 +12,9 @@
 		  <p>Github: www.github.com/MdImranHosen</p>
 	  </section>
   </footer>
-
+<script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+<script>
+   CKEDITOR.replace( 'content' );
+</script>
 </body>
 </html>

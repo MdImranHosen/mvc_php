@@ -25,8 +25,8 @@ a{color:#3399FF;}
 table.tblone tr:nth-child(2n+1){background:#fff;height:30px;}
 table.tblone tr:nth-child(2n){background:#fdf0f1;height:30px;}
 
-input[type="text"] {border:1px solid #ddd;margin-bottom:5px;padding:5px;width:228px;font-size:16px}
-input[type="submit"]{cursor: pointer}
+input[type="text"] {border:1px solid #ddd;margin-bottom:5px;padding:5px;width:350px;font-size:16px}
+input[type="submit"]{cursor: pointer;padding: 5px 8px;font-size: 20px;}
 .adminleft{
 	float: left;
 	width: 200px;
@@ -34,6 +34,7 @@ input[type="submit"]{cursor: pointer}
     margin-right: 10px;
     padding-right: 10px;
 }
+.cat{border:1px solid #ddd;margin-bottom:5px;padding:5px;width:365px;font-size:16px;cursor: pointer;}
 .widget{margin-bottom: 20px;}
 .widget h3{
 	background: #3399ff;

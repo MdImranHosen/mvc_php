@@ -92,9 +92,34 @@ class Admin extends DController
             $mdata['msg'] = "Category Not Updated";
 		}
 
+        $url = BASE_URL."/Admin/categoryList?msg=".urlencode(serialize($mdata));
+        header("Location:$url");
+	}
+	public function delCategory($id=NULL){
+		$table = "tbl_category";
+		$cond  = "id=$id";
+		$catModel = $this->load->model("CatModel");
+		$catResult = $catModel->catDeleteById($table, $cond);
+
+		$mdata = array();
+		if ($catResult == 1) {
+			$mdata['msg'] = "Category Deleted Successfully...";
+		}else{
+            $mdata['msg'] = "Category Not Deleted";
+		}
+
+		$url = BASE_URL."/Admin/categoryList?msg=".urlencode(serialize($mdata));
+        header("Location:$url");
+	}
+
+	public function addArticle(){
         $this->load->view('admin/header');
 		$this->load->view('admin/sidebar');
-		$this->load->view("catupdate", $mdata);
+		$this->load->view('admin/addPost');
 		$this->load->view('admin/footer');
+	}
+	
+	public function articleList(){
+
 	}
 }

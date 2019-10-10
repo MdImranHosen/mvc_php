@@ -23,7 +23,7 @@ if (!empty($_GET['msg'])) {
     		<td><?php echo $value['title']; ?></td>
     		<td>
     			<a href="<?php echo BASE_URL; ?>/Admin/editCategory/<?php echo $value['id']; ?>">Edit</a> || 
-    			<a href="<?php echo BASE_URL; ?>/Admin/delCategory/<?php echo $value['id']; ?>">Delete</a>
+    			<a onclick="return confirm('Are you sure to Delete!');" href="<?php echo BASE_URL; ?>/Admin/delCategory/<?php echo $value['id']; ?>">Delete</a>
 
     		</td>
     	</tr>
