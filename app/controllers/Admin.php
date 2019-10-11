@@ -120,6 +120,19 @@ class Admin extends DController
 	}
 	
 	public function articleList(){
+        $data = array();
+        $tablePost = "tbl_post";
+        $tableCat  = "tbl_category";
 
+        $postModel = $this->load->model("PostModel");
+        $data['listpost'] = $postModel->getpostList($tablePost);
+
+        $catModel         = $this->load->model("CatModel");
+        $data['catlist']  = $catModel->catList($tableCat);
+
+        $this->load->view('admin/header');
+		$this->load->view('admin/sidebar');
+		$this->load->view('admin/postLists', $data);
+		$this->load->view('admin/footer');
 	}
 }
