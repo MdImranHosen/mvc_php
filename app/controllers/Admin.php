@@ -9,6 +9,7 @@ class Admin extends DController
 	{
 		parent:: __construct();
 		Session::checkSession();
+		$data = array();
 	}
 
 	public function Index(){
@@ -30,8 +31,6 @@ class Admin extends DController
 	}
 	
 	public function categoryList(){
-        
-        $data = array();
         $table = "tbl_category";
 		$catModel = $this->load->model("CatModel");
         $data['cat'] = $catModel->catList($table);
@@ -63,7 +62,6 @@ class Admin extends DController
 	}
 
 	public function editCategory($id=NULL){
-		$data = array();
         $table = "tbl_category";
 		$catModel = $this->load->model("CatModel");
         $data['categoryData'] = $catModel->catByID($table, $id);
@@ -113,14 +111,17 @@ class Admin extends DController
 	}
 
 	public function addArticle(){
+        $table = "tbl_category";
+		$catModel = $this->load->model("CatModel");
+        $data['catlist'] = $catModel->catList($table);
+
         $this->load->view('admin/header');
 		$this->load->view('admin/sidebar');
-		$this->load->view('admin/addPost');
+		$this->load->view('admin/addPost', $data);
 		$this->load->view('admin/footer');
 	}
 	
 	public function articleList(){
-        $data = array();
         $tablePost = "tbl_post";
         $tableCat  = "tbl_category";
 
@@ -135,4 +136,30 @@ class Admin extends DController
 		$this->load->view('admin/postLists', $data);
 		$this->load->view('admin/footer');
 	}
+	public function addNewPost(){
+        
+        if(!$_POST['submit']){
+           header("Location: ".BASE_URL."/Admin");
+        } else{
+
+		$tablePost = "tbl_post";
+
+		$title  = $_POST['title'];
+		$content = $_POST['content'];
+		$cat = $_POST['cat'];
+		$data = array('title' => $title, 'content' => $content, 'cat' => $cat );
+
+		$postModel = $this->load->model("PostModel");
+        $result = $postModel->addpostinsert($tablePost, $data);
+
+		$mdata = array();
+		if ($result == 1) {
+			$mdata['msg'] = "Post Added Successfully...";
+		}else{
+            $mdata['msg'] = "Post Not Added";
+		}
+        $url = BASE_URL."/Admin/articleList?msg=".urlencode(serialize($mdata));
+        header("Location:$url");
+	}
+   }
 }

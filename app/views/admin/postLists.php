@@ -1,7 +1,15 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-
-
 <h2>Article List</h2>
+ <?php
+
+if (!empty($_GET['msg'])) {
+   $msg = unserialize(urldecode($_GET['msg']));
+   foreach ($msg as $keyss => $values) {
+       echo "<span style='color:blue;font-weight: bold;'>".$values."</span>";
+   }
+}
+
+?>
 <table id="tableone" class="display" data-order='[[0,"desc"]]' data-page-length='2'>
 	<thead>
 		<tr>
@@ -9,7 +17,7 @@
 			<th width="25%">Title</th>
 			<th width="35%">Content</th>
 			<th width="20%">Category</th>
-			<th width="10%">Action</th>
+			<th width="15%">Action</th>
 		</tr>
 	</thead>
 	<tbody>

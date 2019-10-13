@@ -34,6 +34,8 @@ input[type="submit"]{cursor: pointer;padding: 5px 8px;font-size: 20px;}
     margin-right: 10px;
     padding-right: 10px;
 }
+#posttitle{border:1px solid #ddd;margin-bottom:5px;padding:5px;width:400px;font-size:16px}
+
 .cat{border:1px solid #ddd;margin-bottom:5px;padding:5px;width:365px;font-size:16px;cursor: pointer;}
 .widget{margin-bottom: 20px;}
 .widget h3{
