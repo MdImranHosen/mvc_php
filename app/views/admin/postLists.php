@@ -50,8 +50,10 @@ if (!empty($_GET['msg'])) {
 				 ?>
 		    </td>
 			<td>
-				<a href="#"> Edit </a> ||
-				<a href="#"> Delete </a>
+    			<a href="<?php echo BASE_URL; ?>/Admin/editArticle/<?php echo $value['id']; ?>">Edit</a> || 
+    			<a onclick="return confirm('Are you sure to Delete!');" href="<?php echo BASE_URL; ?>/Admin/delArticle/<?php echo $value['id']; ?>"> Delete</a>
+
+    		</td>
 			</td>
 		</tr>
        <?php } ?>

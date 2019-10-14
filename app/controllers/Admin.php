@@ -43,10 +43,22 @@ class Admin extends DController
 
 	public function insertCategory(){
 
+		if (!($_POST)) {
+       	header("Location: ".BASE_URL."/Admin/addCategory");
+       }
+
+        $input = $this->load->validation('DForm');
+
+        $input->post('name')->isEmpty()->length(2, 50);
+        $input->post('title')->isEmpty()->length(10, 500);
+        
+        if ($input->submit()) {
 		$table = "tbl_category";
 
-		$name  = $_POST['name'];
-		$title = $_POST['title'];
+		$name  = $input->values['name'];
+        $title = $input->values['title'];
+		
+
 		$data = array('name' => $name, 'title' => $title );
 		$catModel = $this->load->model("CatModel");
 		$result = $catModel->insertCat($table, $data);
@@ -59,6 +71,15 @@ class Admin extends DController
 		}
         $url = BASE_URL."/Admin/categoryList?msg=".urlencode(serialize($mdata));
         header("Location:$url");
+       } else{
+
+       	$data['catError'] = $input->errors;
+
+       	$this->load->view('admin/header');
+		$this->load->view('admin/sidebar');
+		$this->load->view('admin/addcategory', $data);
+		$this->load->view('admin/footer');
+       }
 	}
 
 	public function editCategory($id=NULL){
@@ -121,7 +142,54 @@ class Admin extends DController
 		$this->load->view('admin/footer');
 	}
 	
-	public function articleList(){
+	public function addNewPost(){
+       
+       if (!($_POST)) {
+       	header("Location: ".BASE_URL."/Admin/addArticle");
+       }
+
+       $input = $this->load->validation('DForm');
+
+       $input->post('title')->isEmpty()->length(10, 500);
+       $input->post('content')->isEmpty();
+       $input->post('cat')->isCatEmpty();
+
+        if ($input->submit()) {
+        	$tablePost = "tbl_post";
+
+			$title   = $input->values['title'];
+			$content = $input->values['content'];
+			$cat     = $input->values['cat'];
+
+			$data = array('title' => $title, 'content' => $content, 'cat' => $cat );
+
+			$postModel = $this->load->model("PostModel");
+	        $result = $postModel->addpostinsert($tablePost, $data);
+
+			$mdata = array();
+			if ($result == 1) {
+				$mdata['msg'] = "Post Added Successfully...";
+			}else{
+	            $mdata['msg'] = "Post Not Added";
+			}
+	        $url = BASE_URL."/Admin/articleList?msg=".urlencode(serialize($mdata));
+	        header("Location:$url");
+        } else{
+
+            $data['postError'] = $input->errors;
+
+            $table = "tbl_category";
+			$catModel = $this->load->model("CatModel");
+	        $data['catlist'] = $catModel->catList($table);
+
+	        $this->load->view('admin/header');
+			$this->load->view('admin/sidebar');
+			$this->load->view('admin/addPost', $data);
+			$this->load->view('admin/footer');
+        }
+   }
+
+   public function articleList(){
         $tablePost = "tbl_post";
         $tableCat  = "tbl_category";
 
@@ -136,30 +204,21 @@ class Admin extends DController
 		$this->load->view('admin/postLists', $data);
 		$this->load->view('admin/footer');
 	}
-	public function addNewPost(){
-        
-        if(!$_POST['submit']){
-           header("Location: ".BASE_URL."/Admin");
-        } else{
 
-		$tablePost = "tbl_post";
+   public function editArticle($id=NULL){
 
-		$title  = $_POST['title'];
-		$content = $_POST['content'];
-		$cat = $_POST['cat'];
-		$data = array('title' => $title, 'content' => $content, 'cat' => $cat );
+        $tablePost = "tbl_post";
+        $tableCat  = "tbl_category";
 
-		$postModel = $this->load->model("PostModel");
-        $result = $postModel->addpostinsert($tablePost, $data);
+        $postModel = $this->load->model("PostModel");
+        $data['postbyid'] = $postModel->editPostById($tablePost, $id);
 
-		$mdata = array();
-		if ($result == 1) {
-			$mdata['msg'] = "Post Added Successfully...";
-		}else{
-            $mdata['msg'] = "Post Not Added";
-		}
-        $url = BASE_URL."/Admin/articleList?msg=".urlencode(serialize($mdata));
-        header("Location:$url");
-	}
+        $catModel  = $this->load->model("CatModel");
+        $data['catlist']  = $catModel->catList($tableCat);
+
+        $this->load->view('admin/header');
+		$this->load->view('admin/sidebar');
+		$this->load->view('admin/editpost', $data);
+		$this->load->view('admin/footer');
    }
 }

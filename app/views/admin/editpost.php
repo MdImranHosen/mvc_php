@@ -29,21 +29,19 @@
     echo "</div>";
   }
 ?>
-<form action="<?php echo BASE_URL; ?>/Admin/addNewPost" method="post">
+<?php 
+ foreach ($postbyid as $keypost => $postvalue) {
+?>
+<form action="<?php echo BASE_URL; ?>/Admin/updatePost/<?php echo $postvalue['id']; ?>" method="post">
   <table>
      <tr>
-       <?php
-       /* if (!empty($title_err)) {
-          echo "<span style='color:white;background-color:red;padding:5px 10px;'>".$title_err."</span>";
-        }*/
-        ?>
        <td><strong>Title</strong></td>
-       <td><input id="posttitle" type="text" name="title" placeholder="Enter post Title"></td>
+       <td><input id="posttitle" type="text" name="title" value="<?php echo $postvalue['title']; ?>"></td>
      </tr>
      <tr>
        <td><strong> Content </strong></td>
        <td>
-        <textarea name="content" placeholder="Enter text Article."></textarea>
+        <textarea name="content"><?php echo $postvalue['content']; ?></textarea>
         <br>
        </td>
      </tr><br>
@@ -51,18 +49,22 @@
        <td><strong>Category</strong></td>
        <td>
          <select name="cat" class="cat">
-           <option value="" style="display: none;">Select Category.</option>
            <?php 
               foreach ($catlist as $catkey => $catvalue) {
            ?>
-           <option value="<?php echo $catvalue['id']; ?>"><?php echo $catvalue['name']; ?></option>
+           <option
+           <?php  if ($postvalue['cat'] == $catvalue['id']) { ?>
+                selected="selected"
+            <?php  } ?>
+            value="<?php echo $catvalue['id']; ?>"><?php echo $catvalue['name']; ?></option>
            <?php  } ?>
          </select>
        </td>
      </tr>
      <tr>
        <td></td>
-       <td><input type="submit" name="submit" value="Save"></td>
+       <td><input type="submit" name="submit" value="Update"></td>
      </tr>
   </table>
 </form>
+<?php } ?>

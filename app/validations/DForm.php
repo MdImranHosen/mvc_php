@@ -11,6 +11,8 @@ class DForm{
 
 	public function post($key){
        $this->values[$key] = trim($_POST[$key]);
+       $this->values[$key] = stripcslashes($_POST[$key]);
+       $this->values[$key] = htmlspecialchars($_POST[$key]);
        $this->currentValue = $key;
        return $this;
 	}
@@ -21,9 +23,16 @@ class DForm{
 		return $this;
 	}
 
-	public function length($min=0, $max){
-		if (strlen($this->values[$this->currentValue]) > $min OR strlen($this->values[$this->currentValue]) < $max) {
-		  $this->errors[$this->currentValue]['length'] = "Should Min".$min." And Max".$max." Characters.";
+	public function isCatEmpty(){
+		if (empty($this->values[$this->currentValue]) OR $this->values[$this->currentValue] == 0) {
+			$this->errors[$this->currentValue]['empty'] = "Field must not be Empty";
+		}
+		return $this;
+	}
+
+	public function length($min = 0, $max){
+		if (strlen($this->values[$this->currentValue]) < $min OR strlen($this->values[$this->currentValue]) > $max) {
+		  $this->errors[$this->currentValue]['length'] = "Should Min ".$min." And Max ".$max." Characters.";
 		}
 		return $this;
 	}

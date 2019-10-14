@@ -51,4 +51,11 @@ class PostModel extends DModel{
 	public function addpostinsert($tablePost, $data){
      return $this->db->insert($tablePost, $data);
 	}
+
+	public function editPostById($table, $id){
+
+       $sql = "SELECT * FROM $table WHERE id=:id";
+       $data = array(":id" => $id);
+       return $this->db->select($sql, $data);
+	}
 }
