@@ -58,4 +58,11 @@ class PostModel extends DModel{
        $data = array(":id" => $id);
        return $this->db->select($sql, $data);
 	}
+
+	public function editpostupdate($table, $data, $cond){
+		return $this->db->update($table, $data, $cond);
+	}
+	public function postDeleteById($table, $cond){
+		return $this->db->delete($table, $cond);
+	}
 }

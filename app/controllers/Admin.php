@@ -221,4 +221,77 @@ class Admin extends DController
 		$this->load->view('admin/editpost', $data);
 		$this->load->view('admin/footer');
    }
+   public function updatePost($id=NULL){
+
+       if (!($_POST)) {
+       	header("Location: ".BASE_URL."/Admin/articleList");
+       }
+
+       $input = $this->load->validation('DForm');
+
+       $input->post('title')->isEmpty()->length(10, 500);
+       $input->post('content')->isEmpty();
+       $input->post('cat')->isCatEmpty();
+       
+       if ($input->submit()) {
+
+       $cond  = "id=$id";
+       $tablePost = "tbl_post";
+
+	   $title   = $input->values['title'];
+	   $content = $input->values['content'];
+	   $cat     = $input->values['cat'];
+
+	   $data = array('title' => $title, 'content' => $content, 'cat' => $cat );
+
+	   $postModel = $this->load->model("PostModel");
+       $result = $postModel->editpostupdate($tablePost, $data, $cond);
+
+       $mdata = array();
+		if ($result == 1) {
+			$mdata['msg'] = "Post Updated Successfully...";
+		}else{
+            $mdata['msg'] = "Post Not Updated";
+		}
+
+        $url = BASE_URL."/Admin/articleList?msg=".urlencode(serialize($mdata));
+        header("Location:$url");
+
+    } else{
+
+            $data['postError'] = $input->errors;
+
+            $tablePost = "tbl_post";
+	        $tableCat  = "tbl_category";
+
+	        $postModel = $this->load->model("PostModel");
+	        $data['postbyid'] = $postModel->editPostById($tablePost, $id);
+
+	        $catModel  = $this->load->model("CatModel");
+	        $data['catlist']  = $catModel->catList($tableCat);
+
+	        $this->load->view('admin/header');
+			$this->load->view('admin/sidebar');
+			$this->load->view('admin/editpost', $data);
+			$this->load->view('admin/footer');
+        }
+   }
+
+   public function delArticle($id=NULL){
+
+   	    $tablePost = "tbl_post";
+		$cond  = "id=$id";
+		$postModel = $this->load->model("PostModel");
+		$result = $postModel->postDeleteById($tablePost, $cond);
+
+		$mdata = array();
+		if ($result == 1) {
+			$mdata['msg'] = "Post Deleted Successfully...";
+		}else{
+            $mdata['msg'] = "Post Not Deleted";
+		}
+
+		$url = BASE_URL."/Admin/articleList?msg=".urlencode(serialize($mdata));
+        header("Location:$url");
+   }
 }
