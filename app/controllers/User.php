@@ -14,7 +14,12 @@ class User extends DController
 		$this->create_user();
 	}
 	public function create_user(){
-        $this->load->view('admin/header');
+		
+        $tableUi = "tbl_ui";
+        $uiModel = $this->load->model("UiModel");
+        $data['color'] = $uiModel->getColor($tableUi);
+
+        $this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar');
         $this->load->view("admin/adduser");
         $this->load->view('admin/footer'); 
@@ -53,7 +58,11 @@ class User extends DController
 
        	$data['userError'] = $input->errors;
 
-       	$this->load->view('admin/header');
+       	$tableUi = "tbl_ui";
+        $uiModel = $this->load->model("UiModel");
+        $data['color'] = $uiModel->getColor($tableUi);
+
+        $this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar');
         $this->load->view("admin/adduser", $data);
         $this->load->view('admin/footer');
@@ -64,9 +73,30 @@ class User extends DController
 		$userModel = $this->load->model("UserModel");
         $data['user'] = $userModel->userList($tableUser);
 
-        $this->load->view('admin/header');
+        $tableUi = "tbl_ui";
+        $uiModel = $this->load->model("UiModel");
+        $data['color'] = $uiModel->getColor($tableUi);
+
+        $this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar');
         $this->load->view("admin/users", $data);
         $this->load->view('admin/footer');
+	}
+
+	public function delUser($id=NULL){
+
+		$table = "tbl_user";
+		$cond  = "id=$id";
+		$userModel = $this->load->model("UserModel");
+		$result = $userModel->userDeleteById($table, $cond);
+
+        $mdata = array();
+		if ($result == 1) {
+			$mdata['msg'] = "User Deleted Successfully...";
+		} else{
+            $mdata['msg'] = "User Not Deleted";
+		}
+        $url = BASE_URL."/User/user_list?msg=".urlencode(serialize($mdata));
+        header("Location:$url");
 	}
 }

@@ -3,9 +3,11 @@
  		<h3>Site Option</h3>
  	    <ul>
  	    	<li><a href="<?php echo BASE_URL; ?>/Admin">Home</a></li>
+ 	    	<li><a href="<?php echo BASE_URL; ?>/Admin/uioption">Ui Option</a></li>
  	    	<li><a href="<?php echo BASE_URL; ?>/Login/logout">LogOut</a></li>
  	    </ul>
  	</div>
+  <?php  if (Session::get('level') != 2) { ?>
  	<div class="widget">
  		<h3>Manage User</h3>
  	    <ul>
@@ -13,6 +15,7 @@
  	    	<li><a href="<?php echo BASE_URL; ?>/User/user_list"> User List</a></li>
  	    </ul>
  	</div>
+  <?php } ?>
  	<div class="widget">
  		<h3>Category Option</h3>
  	    <ul>

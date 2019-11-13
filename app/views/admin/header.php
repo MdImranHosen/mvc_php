@@ -4,7 +4,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>Advanced PHP OOP MVC</title>
 <style>
-body {font-family: arial;font-size: 15px;line-height: 18px;margin: 0 auto;width: 850px;background:#EEEEEE}
+
+body {font-family: arial;font-size: 15px;line-height: 18px;margin: 0 auto;width: 850px;background:<?php foreach ($color as $key => $value) { echo $value['color'];  } ?>}
+
 a{color:#3399FF;}
 .headeroption {background: #3399ff url("<?php echo BASE_URL; ?>/img/php.png") no-repeat scroll 25px 12px;height: 74px;overflow: hidden;padding-left: 140px;}
 .headeroption h2{color: #000;font-size: 30px;padding-top: 2px;text-shadow: 0 1px 1px #fff;}

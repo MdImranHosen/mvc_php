@@ -17,14 +17,22 @@ class Admin extends DController
 	}
 
 	public function home(){
-		$this->load->view('admin/header');
+		$tableUi = "tbl_ui";
+        $uiModel = $this->load->model("UiModel");
+        $data['color'] = $uiModel->getColor($tableUi);
+
+        $this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar');
 		$this->load->view('admin/home');
 		$this->load->view('admin/footer');
 	}
 
 	public function addCategory(){
-		$this->load->view('admin/header');
+		$tableUi = "tbl_ui";
+        $uiModel = $this->load->model("UiModel");
+        $data['color'] = $uiModel->getColor($tableUi);
+
+        $this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar');
 		$this->load->view('admin/addcategory');
 		$this->load->view('admin/footer');
@@ -35,7 +43,11 @@ class Admin extends DController
 		$catModel = $this->load->model("CatModel");
         $data['cat'] = $catModel->catList($table);
 
-        $this->load->view('admin/header');
+        $tableUi = "tbl_ui";
+        $uiModel = $this->load->model("UiModel");
+        $data['color'] = $uiModel->getColor($tableUi);
+
+        $this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar');
         $this->load->view("admin/category", $data);
         $this->load->view('admin/footer');
@@ -75,7 +87,11 @@ class Admin extends DController
 
        	$data['catError'] = $input->errors;
 
-       	$this->load->view('admin/header');
+       	$tableUi = "tbl_ui";
+        $uiModel = $this->load->model("UiModel");
+        $data['color'] = $uiModel->getColor($tableUi);
+
+        $this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar');
 		$this->load->view('admin/addcategory', $data);
 		$this->load->view('admin/footer');
@@ -87,7 +103,11 @@ class Admin extends DController
 		$catModel = $this->load->model("CatModel");
         $data['categoryData'] = $catModel->catByID($table, $id);
 
-        $this->load->view('admin/header');
+        $tableUi = "tbl_ui";
+        $uiModel = $this->load->model("UiModel");
+        $data['color'] = $uiModel->getColor($tableUi);
+
+        $this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar');
         $this->load->view("admin/catupdate", $data);
         $this->load->view('admin/footer');
@@ -136,7 +156,11 @@ class Admin extends DController
 		$catModel = $this->load->model("CatModel");
         $data['catlist'] = $catModel->catList($table);
 
-        $this->load->view('admin/header');
+        $tableUi = "tbl_ui";
+        $uiModel = $this->load->model("UiModel");
+        $data['color'] = $uiModel->getColor($tableUi);
+
+        $this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar');
 		$this->load->view('admin/addPost', $data);
 		$this->load->view('admin/footer');
@@ -182,7 +206,11 @@ class Admin extends DController
 			$catModel = $this->load->model("CatModel");
 	        $data['catlist'] = $catModel->catList($table);
 
-	        $this->load->view('admin/header');
+	        $tableUi = "tbl_ui";
+            $uiModel = $this->load->model("UiModel");
+            $data['color'] = $uiModel->getColor($tableUi);
+
+            $this->load->view('admin/header', $data);
 			$this->load->view('admin/sidebar');
 			$this->load->view('admin/addPost', $data);
 			$this->load->view('admin/footer');
@@ -199,7 +227,11 @@ class Admin extends DController
         $catModel         = $this->load->model("CatModel");
         $data['catlist']  = $catModel->catList($tableCat);
 
-        $this->load->view('admin/header');
+        $tableUi = "tbl_ui";
+        $uiModel = $this->load->model("UiModel");
+        $data['color'] = $uiModel->getColor($tableUi);
+
+        $this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar');
 		$this->load->view('admin/postLists', $data);
 		$this->load->view('admin/footer');
@@ -216,7 +248,11 @@ class Admin extends DController
         $catModel  = $this->load->model("CatModel");
         $data['catlist']  = $catModel->catList($tableCat);
 
-        $this->load->view('admin/header');
+        $tableUi = "tbl_ui";
+        $uiModel = $this->load->model("UiModel");
+        $data['color'] = $uiModel->getColor($tableUi);
+
+        $this->load->view('admin/header', $data);
 		$this->load->view('admin/sidebar');
 		$this->load->view('admin/editpost', $data);
 		$this->load->view('admin/footer');
@@ -270,7 +306,11 @@ class Admin extends DController
 	        $catModel  = $this->load->model("CatModel");
 	        $data['catlist']  = $catModel->catList($tableCat);
 
-	        $this->load->view('admin/header');
+	        $tableUi = "tbl_ui";
+		    $uiModel = $this->load->model("UiModel");
+		    $data['color'] = $uiModel->getColor($tableUi);
+
+		    $this->load->view('admin/header', $data);
 			$this->load->view('admin/sidebar');
 			$this->load->view('admin/editpost', $data);
 			$this->load->view('admin/footer');
@@ -294,4 +334,48 @@ class Admin extends DController
 		$url = BASE_URL."/Admin/articleList?msg=".urlencode(serialize($mdata));
         header("Location:$url");
    }
+
+   public function uioption(){
+    $tableUi = "tbl_ui";
+    $uiModel = $this->load->model("UiModel");
+    $data['color'] = $uiModel->getColor($tableUi);
+
+    $this->load->view('admin/header', $data);
+	$this->load->view('admin/sidebar');
+	$this->load->view('admin/ui', $data);
+	$this->load->view('admin/footer');
+   }
+
+   public function changeui(){
+
+   	$input = $this->load->validation('DForm');
+
+       $input->post('color')->isEmpty();
+       
+       if ($input->submit()) {
+       $id = 1;
+       $cond  = "id=$id";
+       $tableUi = "tbl_ui";
+
+	   $color   = $input->values['color'];
+
+	   $data = array('color' => $color);
+
+	   $uiModel = $this->load->model("UiModel");
+       $result = $uiModel->editUIupdate($tableUi, $data, $cond);
+
+       $mdata = array();
+		if ($result == 1) {
+			$mdata['msg'] = "UI Updated Successfully...";
+		}else{
+            $mdata['msg'] = "UI Not Updated";
+		}
+
+        $url = BASE_URL."/Admin/uioption?msg=".urlencode(serialize($mdata));
+        header("Location:$url");
+
+   }
+  }
+
+
 }

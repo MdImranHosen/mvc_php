@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>Advanced PHP OOP MVC</title>
 <style>
-body {font-family: arial;font-size: 15px;line-height: 18px;margin: 0 auto;width: 850px;background:<?php foreach ($color as $key => $value) { echo $value['color'];  } ?>}
+body {font-family: arial;font-size: 15px;line-height: 18px;margin: 0 auto;width: 850px;background:#eee;}
 a{color:#3399FF;}
 .headeroption {background: #3399ff url("<?php echo BASE_URL; ?>/img/php.png") no-repeat scroll 25px 12px;height: 74px;overflow: hidden;padding-left: 140px;}
 .headeroption h2{color: #000;font-size: 30px;padding-top: 2px;text-shadow: 0 1px 1px #fff;}
@@ -80,6 +80,9 @@ font-size: 18px;}
 .footeroption{height:90px;background:#177de3;overflow:hidden;padding-top:10px;}
 .footerone {background: #3aa0ff;border-radius: 5px;float: left;font-size:18px;line-height:23px;margin-left: 10px;padding:6px 10px;text-align:center;text-shadow: 1px 0 2px #fff;width:390px;overflow: hidden;}
 .footerone p{margin:0;}
+.notfound{text-align: center;}
+.notfound h1{font-size: 70px;}
+.notfound h1 span{font-size: 140px;color:red;display: block;line-height: 180px;}
 </style>
 </head>
 <body>
@@ -88,3 +91,22 @@ font-size: 18px;}
 	
   </header>
 <div class="content">
+  <div class="notfound"><h1><span>404 </span> Not Found</h1>
+   <p>Please visit home page.... <a href="<?php echo BASE_URL; ?>"> Visit Home</a></p>
+  </div>
+  </div>
+
+  <footer class="footeroption">
+    <section class="footerone">
+    <p>Md Imran Hosen</p>
+    <p>Web Developer</p>
+    
+    </section>
+    <section class="footerone">
+      <p>Like us: facebook.com/Md.ImranHosen.up</p>
+      <p>Github: www.github.com/MdImranHosen</p>
+    </section>
+  </footer>
+
+</body>
+</html>

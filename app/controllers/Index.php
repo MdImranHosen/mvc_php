@@ -27,14 +27,18 @@ class Index extends DController
         $data['post']     = $postModel->postList($tablePost);
         $data['newpost']  = $postModel->newpostList($tablePost);
 
-        $this->load->view("header");
+        $tableUi = "tbl_ui";
+        $uiModel = $this->load->model("UiModel");
+        $data['color'] = $uiModel->getColor($tableUi);
+
+        $this->load->view("header", $data);
         $this->load->view("search", $data);
         $this->load->view("content", $data);
 		$this->load->view("sidebar", $data);
 		$this->load->view("footer");
 		
 	}
-	public function postDetails($id){
+	public function postDetails($id=NULL){
 
 	    $data = array();
         $tablePost = "tbl_post";
@@ -48,13 +52,17 @@ class Index extends DController
         $data['catlist']  = $catModel->catList($tableCat);
         $data['newpost']  = $postModel->newpostList($tablePost);
         
-        $this->load->view("header");
+        $tableUi = "tbl_ui";
+        $uiModel = $this->load->model("UiModel");
+        $data['color'] = $uiModel->getColor($tableUi);
+
+        $this->load->view("header", $data);
         $this->load->view("search", $data);
         $this->load->view("post_details", $data);
 		$this->load->view("sidebar", $data);
 		$this->load->view("footer");
 	}
-	public function postByCat($id){
+	public function postByCat($id=NULL){
 
 		$data = array();
         $tablePost = "tbl_post";
@@ -67,7 +75,11 @@ class Index extends DController
         $data['catlist']  = $catModel->catList($tableCat);
         $data['newpost']  = $postModel->newpostList($tablePost);
 
-        $this->load->view("header");
+        $tableUi = "tbl_ui";
+        $uiModel = $this->load->model("UiModel");
+        $data['color'] = $uiModel->getColor($tableUi);
+
+        $this->load->view("header", $data);
         $this->load->view("search", $data);
         $this->load->view("postbycat", $data);
 		$this->load->view("sidebar", $data);
@@ -89,10 +101,18 @@ class Index extends DController
         $data['catlist']  = $catModel->catList($tableCat);
         $data['newpost']  = $postModel->newpostList($tablePost);
 
-        $this->load->view("header");
+        $tableUi = "tbl_ui";
+        $uiModel = $this->load->model("UiModel");
+        $data['color'] = $uiModel->getColor($tableUi);
+
+        $this->load->view("header", $data);
         $this->load->view("search", $data);
         $this->load->view("sresult", $data);
 		$this->load->view("sidebar", $data);
 		$this->load->view("footer");
+	}
+
+	public function notFound(){
+		$this->load->view("404");
 	}
 }

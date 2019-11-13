@@ -33,7 +33,7 @@ if (!empty($_GET['msg'])) {
             </td>
     		<td>
     			<a href="<?php echo BASE_URL; ?>/User/editUser/<?php echo $value['id']; ?>">Edit</a> || 
-    			<a onclick="return confirm('Are you sure to Delete!');" href="<?php echo BASE_URL; ?>/User/delUser/<?php echo $value['id']; ?>">Delete</a>
+    			<a onclick="return confirm('Are you sure to Delete!');" href="<?php echo BASE_URL; ?>/User/delUser/<?php echo $value['id']; ?>"> Delete</a>
 
     		</td>
     	</tr>

@@ -40,8 +40,8 @@ class Main{
                include $filename;
                if (class_exists($this->controllerName)) {
                	  $this->controller = new $this->controllerName();
-               } else{ header("Location:".BASE_URL); }
-    		} else{ header("Location:".BASE_URL); }
+               } else{ header("Location:".BASE_URL."/Index/notFound"); }
+    		} else{ header("Location:".BASE_URL."/Index/notFound"); }
     	}
     }
 
@@ -51,7 +51,7 @@ class Main{
           if (method_exists($this->controller, $this->methodName)) {
           	$this->controller->{$this->methodName}($this->url[2]);
           } else{
-            header("Location:".BASE_URL);
+            header("Location:".BASE_URL."/Index/notFound");
           }
     	} else{
     		if (isset($this->url[1])) {
@@ -59,14 +59,15 @@ class Main{
     			if (method_exists($this->controller, $this->methodName)) {
 	          	$this->controller->{$this->methodName}();
 	           } else{
-	            header("Location:".BASE_URL);
+	            header("Location:".BASE_URL."/Index/notFound");
 	           }
     		} else{
 
     			if (method_exists($this->controller, $this->methodName)) {
 	          	$this->controller->{$this->methodName}();
 	           } else{
-	            header("Location:".BASE_URL."/Index");
+	            header("Location:".BASE_URL."/Index/notFound");
+              // header("Location:".BASE_URL);
 	           }
 
     		}
